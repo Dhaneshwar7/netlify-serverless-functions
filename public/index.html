@@ -7,22 +7,40 @@
 		<title>Jamstack Explorers - Up and Running with Serverless Functions</title>
 	</head>
 	<body>
-		<h1>Up and Running with Serverless Functions</h1>
+		<h1>Up and Running with Serverless Functionss</h1>
 		<button id="fetch-btn">Fetch</button>
 		<hr />
-		<button id="fetch-pokedex-btn">Fetch Pokedox</button>
+		<button id="fetch-hoen-btn">Fetch hoen</button>
+		<hr />
+		<button id="fetch-kato-btn">Fetch kato</button>
 		<p id="response-output">Response Placeholder</p>
 
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
 				const fetchBtn = document.getElementById('fetch-btn');
-				const fetchPokedexBtn = document.getElementById('fetch-pokedex-btn');
+				const fetchHoenbtn = document.getElementById('fetch-hoen-btn');
+				const fetchKatobtn = document.getElementById('fetch-kato-btn');
 				const responseText = document.getElementById('response-output');
 
-				fetchPokedexBtn.addEventListener('click', async () => {
-					const res = await fetch('/.netlify/functions/pokedex').then(res =>
-						res.json()
-					);
+				fetchHoenbtn.addEventListener('click', async () => {
+					const res = await fetch('/.netlify/functions/pokedex', {
+						method: 'POST',
+						body: JSON.stringify({
+							region: 'kanto',
+						}),
+					}).then(res => res.json());
+					console.log(res);
+
+					responseText.innerText = JSON.stringify(res);
+				});
+
+				fetchKatobtn.addEventListener('click', async () => {
+					const res = await fetch('/.netlify/functions/pokedex', {
+						method: 'POST',
+						body: JSON.stringify({
+							region: 'hoenn',
+						}),
+					}).then(res => res.json());
 					console.log(res);
 
 					responseText.innerText = JSON.stringify(res);
